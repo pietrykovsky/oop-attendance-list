@@ -32,7 +32,7 @@ bool Model::add(Date date) {
 	return 0;
 }
 
-AttendanceList Model::get(Date date) {
+AttendanceList Model::getDate(Date date) {
 	if (size > 0) {
 		for (int i = 0; i < size; i++) {
 			if (attendance_list[i].getDate() == date) {
@@ -42,29 +42,11 @@ AttendanceList Model::get(Date date) {
 	}
 }
 
-void Model::print(Date date) {
-	if (size > 0) {
-		for (int i = 0; i < size; i++) {
-			if (attendance_list[i].getDate() == date) {
-				for (int j = 0; j < person_list.getSize(); j++) {
-					person_list.getPerson(j).print();
-					std::cout << "Was present: ";
-					if (attendance_list->getAttendance(j))
-						std::cout << "Yes";
-					else
-						std::cout << "No";
-					std::cout << "\n";
-				}
-			}
-
-		}
-	}
-	else
-		std::cout << "NIE MA TAKIEGO DNIA W BAZIE DANYCH" << '\n';
+AttendanceList* Model::getList()
+{
+	return attendance_list;
 }
 
-void Model::printDates() {
-	for (int i = 0; i < size; i++) {
-		attendance_list[i].getDate().print();
-	}
+unsigned int Model::getSize() {
+	return size;
 }

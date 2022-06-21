@@ -44,7 +44,10 @@ void UserInterface::menu() {
 }
 
 void UserInterface::printPersonList() {
-	model.person_list.print();
+	Person *list = model.person_list.getList();
+	unsigned int size = model.person_list.getSize();
+	for (unsigned int i = 0; i < size; i++)
+		list[i].print();
 }
 
 void UserInterface::addPersonToList() {
@@ -72,7 +75,10 @@ void UserInterface::changePersonInList() {
 	} while (model.person_list.setPerson(person, index));
 }
 void UserInterface::printDateList() {
-	model.printDates();
+	AttendanceList *list = model.getList();
+	unsigned int size = model.getSize();
+	for (int i = 0; i < size; i++)
+		list[i].getDate().print();
 }
 void UserInterface::addDateToList() {
 	Date date;
@@ -90,7 +96,26 @@ void UserInterface::printAttendanceList() {
 		std::cout << "Enter birhtdate (DD MM YYYY): ";
 		std::cin >> day >> month >> year;
 	} while (date.setDate(day, month, year));
-	model.print(date);
+	AttendanceList* list = model.getList();
+	unsigned int size = model.getSize();
+	if (size > 0) {
+		for (int i = 0; i < size; i++) {
+			if (list[i].getDate() == date) {
+				for (int j = 0; j < model.person_list.getSize(); j++) {
+					model.person_list.getPerson(j).print();
+					std::cout << "Was present: ";
+					if (list->getAttendance(j))
+						std::cout << "Yes";
+					else
+						std::cout << "No";
+					std::cout << "\n";
+				}
+			}
+
+		}
+	}
+	else
+		std::cout << "NIE MA TAKIEGO DNIA W BAZIE DANYCH" << '\n';
 }
 void UserInterface::setAttendanceList() {
 	Date date;
@@ -101,8 +126,8 @@ void UserInterface::setAttendanceList() {
 	} while (date.setDate(day, month, year));
 	std::cout << "Enter ID of the person: ";
 	std::cin >> index;
-	if (model.get(date).getAttendance(index))
-		model.get(date).setAttendance(false, index);
+	if (model.getDate(date).getAttendance(index))
+		model.getDate(date).setAttendance(false, index);
 	else
-		model.get(date).setAttendance(true, index);
+		model.getDate(date).setAttendance(true, index);
 }

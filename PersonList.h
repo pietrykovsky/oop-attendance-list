@@ -10,7 +10,6 @@ public:
 	PersonList();
 	PersonList(unsigned int size);
 	bool add(Person person); //add person to end of the list
-	void print();
 
 	//setters
 	bool setPerson(Person person, unsigned int index);
@@ -18,5 +17,6 @@ public:
 	//getters
 	unsigned int getSize();
 	Person getPerson(unsigned int index);
+	Person * getList();
 };
 

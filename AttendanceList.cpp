@@ -19,12 +19,6 @@ AttendanceList::AttendanceList(Date date, unsigned int size) {
 		attendance[i] = false;
 }
 
-void AttendanceList::print() {
-	for (int i = 0; i < size; i++) {
-		std::cout << attendance[i] << '\n';
-	}
-}
-
 //setters
 bool AttendanceList::setAttendance(bool attendance, unsigned int id) {
 	if (id < size) {
@@ -44,6 +38,11 @@ bool AttendanceList::getAttendance(unsigned int id) {
 	if (id < size)
 		return attendance[id];
 	return 0;
+}
+
+bool* AttendanceList::getList()
+{
+	return attendance;
 }
 
 Date AttendanceList::getDate() {

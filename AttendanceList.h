@@ -12,7 +12,6 @@ public:
 	AttendanceList();
 	AttendanceList(unsigned int size);
 	AttendanceList(Date date, unsigned int size);
-	void print();
 
 	//setters
 	bool setAttendance(bool attendance, unsigned int id);
@@ -20,5 +19,6 @@ public:
 
 	//getters
 	bool getAttendance(unsigned int id);
+	bool* getList();
 	Date getDate();
 };
